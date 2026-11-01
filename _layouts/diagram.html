@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<script type="module">
+  import mermaid from
+    'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  const diagrams = [];
+
+  document.querySelectorAll('pre code.language-mermaid')
+    .forEach((code) => {
+      const diagram = document.createElement('div');
+      diagram.className = 'mermaid';
+      diagram.textContent = code.textContent;
+
+      code.closest('pre').replaceWith(diagram);
+      diagrams.push(diagram);
+    });
+
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'strict',
+    theme: 'default'
+  });
+
+  if (diagrams.length > 0) {
+    await mermaid.run({ nodes: diagrams });
+  }
+</script>
+
+<style>
+  .mermaid {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    text-align: center;
+  }
+</style>
