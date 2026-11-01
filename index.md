@@ -7,6 +7,11 @@ description: "Setup, operation, and troubleshooting guides for our photofinish a
 
 Practical guides for setting up, maintaining, and troubleshooting our photofinish and lap timing equipment. Each guide includes the relevant equipment, network settings, and verification steps.
 
+## Setup diagrams
+
+- **[SSO FinishLynx E-Timing setup]({{ '/etiming-setup-diagram.html' | relative_url }})**\
+  View network, timing equipment, peripheral, and video diagrams, including equipment addresses and setup details to confirm.
+
 ## Setup guides
 
 - **[MYLAPS clock synchronization through Capture]({{ '/mylaps-capture-ntp.html' | relative_url }})**  
