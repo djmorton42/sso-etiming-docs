@@ -67,8 +67,7 @@ Solid lines are Ethernet or local Wi-Fi on that router. The dotted line is the w
 | Network | `192.168.20.0/24` |
 | Timing router | `192.168.20.1` |
 | Office router | `192.168.20.2` |
-| Temporary configuration computer | `192.168.20.10` |
-| Fixed-address equipment | Unused addresses from `192.168.20.11` through `192.168.20.127` |
+| Fixed-address equipment | Unused addresses from `192.168.20.3` through `192.168.20.127` |
 | DHCP pool | `192.168.20.128` through `192.168.20.199` |
 
 Assign stable addresses to computers hosting shares or services, either manually outside the DHCP pool or using DHCP reservations on `SSO-Etiming`. Record those assignments separately. Addresses in this document such as `192.168.20.25` are examples, not confirmed equipment assignments.
@@ -120,7 +119,7 @@ Under **Setup → Basic Setup**, enter:
 
 If the Start IP field only accepts the last octet, enter `128`. Save and apply. The pool is `192.168.20.128` through `192.168.20.199`.
 
-After changing the router address, reconnect the computer's Ethernet connection to renew its address, then open `http://192.168.20.1`. If necessary, temporarily use the manual computer address described in section 3.
+After changing the router address, reconnect the computer's Ethernet connection to renew its address, then open `http://192.168.20.1`. If it does not get an address, set one manually on `192.168.20.0/24` as described in section 3.
 
 ### Wireless basic settings
 
@@ -175,14 +174,7 @@ Under **Setup → Basic Setup**, enter:
 
 Save and apply. Losing browser access now is expected: the router changed subnets and stopped supplying DHCP addresses.
 
-Temporarily set the computer's Ethernet IPv4 configuration to:
-
-| Setting | Value |
-| --- | --- |
-| IP address | `192.168.20.10` |
-| Subnet mask | `255.255.255.0` |
-| Default gateway | Blank |
-| DNS servers | Blank |
+Set the computer's Ethernet IPv4 address to any unused address on `192.168.20.0/24` other than `192.168.20.1` or `192.168.20.2`. Use subnet mask `255.255.255.0`, and leave the gateway and DNS blank. Any free address on that subnet works; it is not a reserved assignment.
 
 On Windows 11, open the Ethernet adapter's properties and edit **Internet Protocol Version 4 (TCP/IPv4)**. One route is **Win+R → `ncpa.cpl` → Ethernet → Properties**.
 
@@ -232,7 +224,7 @@ Keep both radios on the default LAN bridge, `br0`. Do not create a separate offi
 
 ### Router-to-router link
 
-With the computer still plugged into SSO-Office and using temporary address `192.168.20.10`, run:
+With the computer still plugged into SSO-Office and using the manual address from section 3, run:
 
 ```bat
 ping 192.168.20.2
@@ -308,7 +300,7 @@ The local `192.168.20.x` route is sufficient to reach timing equipment. If venue
 
 | Symptom | Checks |
 | --- | --- |
-| Cannot reach SSO-Office locally | Use a LAN port, check the computer's address and mask, and try temporary address `.10`. |
+| Cannot reach SSO-Office locally | Use a LAN port. Give the computer an unused address on `192.168.20.0/24`, other than `.1` or `.2`, with mask `255.255.255.0`. |
 | Can reach `.2` but not `.1` | Check the office 2.4 GHz mode, SSID `SSO-ETiming-Link`, WPA2/AES/password match, and timing-router radio. Inspect Status → Wireless. |
 | Static address works but DHCP does not | Check that DHCP is enabled only on SSO-Etiming and interfaces remain bridged. Reconnect the client and test again. |
 | Office Wi-Fi does not appear | Confirm the 5 GHz radio is enabled in AP mode with SSID broadcast enabled. Check that the device supports 5 GHz. |
