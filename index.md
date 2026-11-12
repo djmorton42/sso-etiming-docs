@@ -14,6 +14,9 @@ Practical guides for setting up, maintaining, and troubleshooting our photofinis
 
 ## Setup guides
 
+- **[E-Timing wireless LAN setup]({{ '/etiming-router-setup.html' | relative_url }})**  
+  Configure the two ASUS routers so the timing desk and results office share one LAN over a 2.4 GHz bridge. Includes the address plan, DD-WRT settings, and verification.
+
 - **[MYLAPS clock synchronization through Capture]({{ '/mylaps-capture-ntp.html' | relative_url }})**  
   Configure local DNS and NTP on Capture so the MYLAPS decoder can synchronize its clock on the isolated timing LAN. Includes setup instructions, meet-day checks, and troubleshooting.
 

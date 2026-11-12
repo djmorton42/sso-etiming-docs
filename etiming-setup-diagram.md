@@ -46,7 +46,7 @@ The diagram groups equipment by the clouds in the source image. Grouping does no
 
 ### Items to confirm
 
-- How the office ASUS router connects to the E-Timing ASUS router: wireless bridge, mesh, or another arrangement.
+- The [wireless LAN setup]({{ '/etiming-router-setup.html' | relative_url }}) links these ASUS routers with a 2.4 GHz client bridge on `192.168.20.0/24`. This diagram is still the older source image: it does not show that bridge, and its equipment addresses are `192.168.0.x`.
 - Whether the D-Link unit operates as a router or an access point, and whether its DHCP server is disabled.
 - How the mini computer attaches to the LAN.
 - Which connection gives Capture internet access. It is separate from the isolated timing LAN; the source image does not show its physical path.
