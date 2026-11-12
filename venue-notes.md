@@ -13,7 +13,7 @@ Distances, lens choices, and placements below come from setup at that rink. A da
 
 | Venue | Network | Camera | Timing desk | Cables and loop |
 | --- | --- | --- | --- | --- |
-| [Brampton](#brampton) | — | No known mount. Announcer-booth glass blocks the obvious platform. | — | — |
+| [Brampton](#brampton) | — | No good place to put the camera. Announcer-booth glass blocks the obvious platform. | — | — |
 | [Cambridge](#cambridge) | Drops after about 4 hours; otherwise adequate for streaming. | — | — | Wires can run around the back of the arena. |
 | [Kingston](#kingston) | Poor Wi-Fi. | Opposite side of the rink; wide-angle lens. | Raised porch. | About 250 ft of Ethernet around the boards, through the netting, to a switch, then up to the desk. |
 | [Ottawa](#ottawa) | — | — | Wood benches. | Transponder loop: only the inner half responded. |
@@ -24,7 +24,7 @@ Distances, lens choices, and placements below come from setup at that rink. A da
 
 ### Camera
 
-There is no established place to mount the camera. The platform that would otherwise be the obvious position looks through the announcer booth glass, which blocks the shot.
+There is no good place to put the camera. The obvious platform looks through the announcer booth glass, which blocks the shot.
 
 ## Cambridge
 
