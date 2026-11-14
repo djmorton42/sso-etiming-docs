@@ -23,7 +23,7 @@ Practical guides for setting up, maintaining, and troubleshooting our photofinis
 ## Venue notes
 
 - **[Venue notes]({{ '/venue-notes.html' | relative_url }})**  
-  What to expect at each rink: network, camera placement, timing desk, cable runs, and transponder loop.
+  What to expect at each rink: network, camera placement, timing desk, cable runs, transponder loop, and overnight access.
 
 <!-- Add future guides using the same pattern:
 - **[Guide title]({{ '/guide-filename.html' | relative_url }})**  

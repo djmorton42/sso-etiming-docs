@@ -1,24 +1,25 @@
 ---
 title: "Venue notes"
-description: "Field notes for each rink: network, camera placement, timing desk, cable runs, and transponder loop."
+description: "Field notes for each rink: network, camera placement, timing desk, cable runs, transponder loop, and overnight access."
 ---
 
 # Venue notes
 
-Field notes for rinks where races are timed. Read the venue section before a meet when planning the camera, cables, desk, and network. After a meet, add anything the next crew will need: a working mount, a cable route, a network failure, or a change in the building.
+Field notes for rinks where races are timed. Read the venue section before a meet when planning the camera, cables, desk, network, and whether equipment can stay overnight. After a meet, add anything the next crew will need: a working mount, a cable route, a network failure, or a change in the building.
 
 Distances, lens choices, and placements below come from setup at that rink. A dash in the summary means that item has not been written down yet.
 
 ## Summary
 
-| Venue | Network | Camera | Timing desk | Cables and loop |
-| --- | --- | --- | --- | --- |
-| [Brampton](#brampton) | — | No good place to put the camera. Announcer-booth glass blocks the obvious platform. | — | — |
-| [Cambridge](#cambridge) | Drops after about 4 hours; otherwise adequate for streaming. | — | — | Wires can run around the back of the arena. |
-| [Kingston](#kingston) | Poor Wi-Fi. | Opposite side of the rink; wide-angle lens. | Raised porch. | About 250 ft of Ethernet around the boards, through the netting, to a switch, then up to the desk. |
-| [Ottawa](#ottawa) | — | — | Wood benches. | Transponder loop: only the inner half responded. |
-| [Toronto](#toronto) | — | Cross bar above the walkway. A mount still has to be built. | Faces away from the rink; not enough room to face the ice. | — |
-| [Waterloo](#waterloo) | Venue Wi-Fi is unusable. Use a phone hotspot for livestreaming and any other internet access. | — | — | — |
+| Venue | Network | Camera | Timing desk | Cables and loop | Overnight |
+| --- | --- | --- | --- | --- | --- |
+| [Brampton](#brampton) | — | No good place to put the camera. Announcer-booth glass blocks the obvious platform. | — | — | — |
+| [Cambridge](#cambridge) | Drops after about 4 hours; otherwise adequate for streaming. | — | — | Wires can run around the back of the arena. | — |
+| [Hamilton](#hamilton) | — | — | — | — | Pack up each night, even if the rink is locked. |
+| [Kingston](#kingston) | Poor Wi-Fi. | Opposite side of the rink; wide-angle lens. | Raised porch. | About 250 ft of Ethernet around the boards, through the netting, to a switch, then up to the desk. | — |
+| [Ottawa](#ottawa) | — | — | Wood benches. | Transponder loop: only the inner half responded. | Usually no overnight rink access. Set up and tear down each day of a two-day meet. |
+| [Toronto](#toronto) | — | Cross bar above the walkway. A mount still has to be built. | Faces away from the rink; not enough room to face the ice. | — | — |
+| [Waterloo](#waterloo) | Venue Wi-Fi is unusable. Use a phone hotspot for livestreaming and any other internet access. | — | — | — | — |
 
 ## Brampton
 
@@ -35,6 +36,12 @@ Venue Wi-Fi drops after about four hours and has to be reconnected. Apart from t
 ### Cabling
 
 Cables can be run around the back of the arena.
+
+## Hamilton
+
+### Overnight
+
+Pack the e-timing equipment up each night for safety, even when the rink is locked.
 
 ## Kingston
 
@@ -55,6 +62,10 @@ The camera is on the opposite side of the rink from the timing desk and uses a w
 The Ethernet run from the camera side to the desk is about 250 feet. It goes around the boards, through the netting, into a switch, and then up to the timing desk.
 
 ## Ottawa
+
+### Overnight
+
+The rink is usually not available overnight. For a two-day meet, set up and tear down the e-timing equipment each day.
 
 ### Timing desk
 
