@@ -47,7 +47,7 @@ Pack the e-timing equipment up each night for safety, even when the rink is lock
 
 ### Network
 
-Venue Wi-Fi is poor.
+Venue Wi-Fi is poor, and cell network coverage is also very poor. Must reduce livestream bandwidth (1500 to 2000 kbps worked ok, usual is 3500 kbps)
 
 ### Timing desk
 
@@ -90,7 +90,3 @@ The timing desk faces away from the rink. There is not enough room to set it fac
 ### Network
 
 Venue Wi-Fi is unusable. Use a phone hotspot for livestreaming and for any other internet access.
-
-## Updating these notes
-
-Edit the venue after a meet when the route, mount, desk, or network behaved differently than this page describes. Keep the note specific enough to set up from: which side of the rink, how the cable actually runs, and what failed.

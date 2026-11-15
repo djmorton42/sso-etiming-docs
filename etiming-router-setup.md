@@ -1,6 +1,6 @@
 ---
 layout: diagram
-title: "E-Timing wireless LAN setup"
+title: "E-Timing Router and LAN setup"
 description: "DD-WRT configuration for the SSO-Etiming and SSO-Office ASUS routers: wireless bridge, address plan, and verification."
 ---
 
@@ -70,9 +70,7 @@ Solid lines are Ethernet or local Wi-Fi on that router. The dotted line is the w
 | Fixed-address equipment | Unused addresses from `192.168.20.3` through `192.168.20.127` |
 | DHCP pool | `192.168.20.128` through `192.168.20.199` |
 
-Assign stable addresses to computers hosting shares or services, either manually outside the DHCP pool or using DHCP reservations on `SSO-Etiming`. Record those assignments separately. Addresses in this document such as `192.168.20.25` are examples, not confirmed equipment assignments.
-
-Equipment still using static `192.168.0.x` addresses must be moved to `192.168.20.x` before it can share this LAN. The [setup diagram]({{ '/etiming-setup-diagram.html' | relative_url }}) and [MYLAPS clock synchronization]({{ '/mylaps-capture-ntp.html' | relative_url }}) still record hosts on `192.168.0.x`, including Capture at `192.168.0.25`. Check applications, mapped drives, decoder settings, and any other configuration that refers to an old address. Avoid duplicate addresses.
+Assign stable addresses to computers hosting shares or services, either manually outside the DHCP pool or using DHCP reservations on `SSO-Etiming`. Record those assignments separately. 
 
 Obtain the following from the timing team's secure credential record:
 
@@ -82,7 +80,8 @@ Obtain the following from the timing team's secure credential record:
 - The `SSO-Office` wireless password, which may be the same as the `etiming` password.
 - Credentials for any Windows shares or applications.
 
-Do not put passwords in this document or in the Git repository.
+
+Do not put passwords in this document or in the Git repository. Contact daniel@djmorton.com for access to the credentials stored in 1Password.
 
 ## 1. Prepare the routers
 
