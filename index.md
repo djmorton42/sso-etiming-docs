@@ -20,6 +20,9 @@ Practical guides for setting up, maintaining, and troubleshooting our photofinis
 - **[MYLAPS clock synchronization through Capture]({{ '/mylaps-capture-ntp.html' | relative_url }})**  
   Configure local DNS and NTP on Capture so the MYLAPS decoder can synchronize its clock on the isolated timing LAN. Includes setup instructions, meet-day checks, and troubleshooting.
 
+- **[Starter timing cable: XLR to MYLAPS D-sub 15]({{ '/mylaps-xlr-db15-wiring.html' | relative_url }})**  
+  Wire the starter pistol's three-pin XLR timing branch to the MYLAPS decoder's D-sub 15 auxiliary port. Includes the pin connections, the local 8-to-13 jumper, and the checks that confirm a start.
+
 ## Venue notes
 
 - **[Venue notes]({{ '/venue-notes.html' | relative_url }})**  
