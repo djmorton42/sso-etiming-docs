@@ -247,12 +247,12 @@ The Ethernet adapter should have an address in `192.168.20.128`–`192.168.20.19
 Connect a host computer to SSO-Etiming and give it a stable LAN address. From an office computer, test its share by IP in File Explorer, for example:
 
 ```text
-\\192.168.20.25\Results
+\\192.168.20.15\MEETS
 ```
 
-Replace both the address and share name with the real values. Accessing a share directly is a better initial test than waiting for it to appear under Windows Network.
+Use the standard login credentials for the Livestream/Analysis Comptuer to access shares on it.
 
-For software accessed in a browser, use its actual LAN address and port, for example `http://192.168.20.25:8080`. The application must listen on the LAN interface, not only `localhost`.
+Replace both the address and share name with the real values. Accessing a share directly is a better initial test than waiting for it to appear under Windows Network.
 
 On Windows hosts, use a **Private** network profile for this LAN and allow File and Printer Sharing and the required applications through Windows Firewall on Private networks. Use valid share credentials. Do not disable Windows Firewall as a general fix.
 
@@ -282,7 +282,7 @@ Restart each router separately, then restart both together. Confirm the bridge r
 From an office computer, run a continuous ping to the share host while transferring files:
 
 ```bat
-ping -t 192.168.20.25
+ping -t 192.168.20.15
 ```
 
 Use the actual host address. Stop with **Ctrl+C** to see the packet-loss summary. Repeated timeouts or frequent large latency spikes call for a placement or channel change. Verify at the real office location before racing begins. A successful same-room test does not establish range.
