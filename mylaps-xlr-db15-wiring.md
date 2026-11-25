@@ -1,5 +1,4 @@
 ---
-layout: diagram
 title: "Starter timing cable: XLR to MYLAPS D-sub 15"
 description: "Wire the starter pistol's three-pin XLR timing branch to the MYLAPS decoder's D-sub 15 auxiliary port."
 ---
@@ -10,27 +9,11 @@ This adapter connects the three-pin XLR timing branch of the starter pistol’s 
 
 ## Wiring diagram
 
-The diagram shows electrical connections by pin number, rather than physical pin positions. The XLR connector on the adapter is **three-pin female**.
+The diagram shows electrical connections by pin number, rather than physical pin positions. The XLR connector on the adapter is **three-pin female**. The dark lead is ground, matching the black ENCRADIO banana. The green lead is the start signal, matching the green banana. The amber link is the jumper inside the D-sub shell.
 
-```mermaid
-flowchart LR
-    subgraph XLR["Adapter: female 3-pin XLR"]
-        X1["Pin 1: ground"]
-        X3["Pin 3: start signal"]
-        X2["Pin 2: unconnected"]
-    end
-    subgraph DSUB["Adapter: MYLAPS D-sub 15"]
-        D5["Pin 5: ground"]
-        D12["Pin 12: gun input return"]
-        D8["Pin 8: +5 V supply"]
-        D13["Pin 13: gun input positive"]
-        D8 ---|"Local jumper inside adapter"| D13
-    end
-    X1 --- D5
-    X3 --- D12
-```
+![Female 3-pin XLR pin 1 connects to D-sub pin 5, XLR pin 3 connects to D-sub pin 12, and a jumper inside the adapter joins D-sub pins 8 and 13. XLR pin 2 is left unconnected.](mylaps-xlr-db15-wiring.svg)
 
-This page uses the diagram layout, so GitHub Pages draws the figure above. The table below lists the same connections if the figure does not load.
+The table below lists the same connections.
 
 ## Connection table
 
