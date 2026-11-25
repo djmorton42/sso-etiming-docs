@@ -20,11 +20,12 @@ This page documents decoder-to-Capture synchronization. It does not configure or
 | Component or setting | Value |
 | --- | --- |
 | Timing computer | Capture, running Windows 11 |
-| Capture's timing-LAN address | `192.168.0.25` |
-| Possible decoder addresses | `192.168.0.19` or `192.168.0.20` |
-| Decoder's configured DNS server | `192.168.0.25` |
+| Timing LAN | `192.168.20.0/24` (formerly `192.168.0.0/24`; hosts kept the same last octet) |
+| Capture's timing-LAN address | `192.168.20.25` |
+| Possible decoder addresses | `192.168.20.19` or `192.168.20.20` |
+| Decoder's configured DNS server | `192.168.20.25` |
 | Decoder's observed NTP hostname | `us.pool.ntp.org` |
-| Local DNS override | `us.pool.ntp.org` → `192.168.0.25` |
+| Local DNS override | `us.pool.ntp.org` → `192.168.20.25` |
 | Capture's upstream time source | `time.windows.com,0x9` |
 | DNS software on Capture | Technitium DNS Server |
 | NTP software on Capture | Built-in Windows Time service (`W32Time`) |
@@ -36,7 +37,7 @@ Devices use manually assigned IP addresses. Internet Connection Sharing, DHCP, a
 
 1. Capture synchronizes its clock with `time.windows.com` through its internet connection.
 2. The decoder asks Capture's DNS server for the address of `us.pool.ntp.org`.
-3. Technitium answers with `192.168.0.25` instead of a public NTP server address.
+3. Technitium answers with `192.168.20.25` instead of a public NTP server address.
 4. The decoder sends NTP requests directly to Capture on UDP port 123.
 5. Windows Time replies using Capture's clock, and the decoder uses those replies to synchronize.
 
@@ -50,13 +51,13 @@ Perform clock changes and synchronization outside an active race. Commands below
 
 ### 1. Confirm network connectivity
 
-Confirm Capture still has `192.168.0.25` on its timing-LAN adapter and that its separate internet connection works:
+Confirm Capture still has `192.168.20.25` on its timing-LAN adapter and that its separate internet connection works:
 
 ```powershell
 ipconfig /all
 ```
 
-On the decoder, set the DNS server to `192.168.0.25`. Leave a secondary DNS server blank if possible, so the decoder cannot bypass the override. Keep its normal IP address, subnet mask, and other timing-network settings.
+On the decoder, set the DNS server to `192.168.20.25`. Leave a secondary DNS server blank if possible, so the decoder cannot bypass the override. Keep its normal IP address, subnet mask, and other timing-network settings.
 
 ### 2. Configure Technitium
 
@@ -74,12 +75,12 @@ Create the override:
 | --- | --- |
 | Type | `A` |
 | Name | `@` |
-| IPv4 address | `192.168.0.25` |
+| IPv4 address | `192.168.20.25` |
 | TTL | `60` seconds |
 
 `@` means the exact zone name, so this record answers queries for `us.pool.ntp.org`. Retain the automatically created SOA and NS records. If the zone or A record already exists, inspect or edit it rather than adding a duplicate.
 
-Under **Settings → General → DNS Server Local End Points**, make sure DNS listens on `192.168.0.25:53`, or on the default all-interface IPv4 listener, `0.0.0.0:53`. Labels may differ slightly by Technitium version.
+Under **Settings → General → DNS Server Local End Points**, make sure DNS listens on `192.168.20.25:53`, or on the default all-interface IPv4 listener, `0.0.0.0:53`. Labels may differ slightly by Technitium version.
 
 The decoder also requested `mylaps.com` and `api-gateway.mylaps.com`. Do not redirect those names; they are separate from this NTP configuration. Resolving their public addresses does not give the decoder internet access.
 
@@ -103,8 +104,8 @@ Keep the Windows NTP client enabled. No change to `AnnounceFlags` was part of th
 Allow DNS and NTP requests from either decoder address. This script creates the named rules if missing and updates them if they already exist:
 
 ```powershell
-$captureIP = '192.168.0.25'
-$decoderIPs = @('192.168.0.19', '192.168.0.20')
+$captureIP = '192.168.20.25'
+$decoderIPs = @('192.168.20.19', '192.168.20.20')
 
 $rules = @(
   @{ Name = 'MYLAPS DNS UDP'; Protocol = 'UDP'; Port = 53 },
@@ -150,10 +151,10 @@ Check for a successful resync and a recent **Last Successful Sync Time**. A sour
 ### 6. Verify DNS and synchronize the decoder
 
 ```powershell
-nslookup us.pool.ntp.org 192.168.0.25
+nslookup us.pool.ntp.org 192.168.20.25
 ```
 
-The answer must give `192.168.0.25`. A `Server: Unknown` label is harmless if the returned address is correct; it usually means the DNS server has no reverse DNS name.
+The answer must give `192.168.20.25`. A `Server: Unknown` label is harmless if the returned address is correct; it usually means the DNS server has no reverse DNS name.
 
 Restart the decoder if it is still using an old cached answer, then select **Sync using NTP** on the decoder. Confirm that the decoder reports successful synchronization.
 
@@ -162,7 +163,7 @@ Restart the decoder if it is still using an old cached answer, then select **Syn
 Capture on Capture's **timing-LAN adapter**, using this display filter:
 
 ```text
-(ip.addr == 192.168.0.19 || ip.addr == 192.168.0.20) && (dns || udp.port == 123)
+(ip.addr == 192.168.20.19 || ip.addr == 192.168.20.20) && (dns || udp.port == 123)
 ```
 
 Expected traffic:
@@ -170,7 +171,7 @@ Expected traffic:
 | Direction | Protocol | Expected content |
 | --- | --- | --- |
 | Decoder → Capture | DNS | Query for `us.pool.ntp.org` |
-| Capture → Decoder | DNS | Answer containing `192.168.0.25` |
+| Capture → Decoder | DNS | Answer containing `192.168.20.25` |
 | Decoder → Capture | NTP | Client request to UDP port 123 |
 | Capture → Decoder | NTP | Server response from UDP port 123 |
 
@@ -182,7 +183,7 @@ Select an NTP server reply and expand **Network Time Protocol**. For ordinary sy
 
 ## Meet-day checks
 
-- Confirm Capture has `192.168.0.25` and the decoder has one of the documented addresses.
+- Confirm Capture has `192.168.20.25` and the decoder has one of the documented addresses.
 - Confirm the Technitium service and Windows Time service are running after startup.
 - Keep Capture awake while providing DNS and NTP.
 - Check Capture's time source and last successful synchronization.

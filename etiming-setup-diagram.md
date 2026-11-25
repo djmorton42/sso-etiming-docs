@@ -6,7 +6,7 @@ description: "Network and peripheral diagrams for the SSO e-timing setup."
 
 # SSO FinishLynx E-Timing Setup
 
-This is an editable transcription of the supplied setup diagram, with the confirmed Capture DNS/NTP addition. The source image describes an older setup: inventory and links below still need comparison with the equipment currently deployed. No passwords or actual account usernames are included.
+This is an editable transcription of the supplied setup diagram, with the confirmed Capture DNS/NTP addition. Addresses below are the current timing LAN, `192.168.20.0/24`: each former `192.168.0.x` host kept the same last octet. The PNG source images in this directory still show `192.168.0.x` and the old `FinishLynx` / `FinishLynxAP5` SSIDs. Use this page and the [router setup]({{ '/etiming-router-setup.html' | relative_url }}) for current addresses and SSIDs. No passwords or actual account usernames are included.
 
 Edit the Mermaid code blocks to update the diagrams. Stable identifiers such as `capture` identify devices in the source; their quoted labels supply the displayed names. Solid lines represent physical cables, not packet direction. Dotted lines represent logical communication or a relationship whose physical path is unspecified.
 
@@ -14,22 +14,22 @@ Edit the Mermaid code blocks to update the diagrams. Stable identifiers such as 
 
 ```mermaid
 flowchart TD
-  subgraph asus_network["ASUS network: FinishLynx / FinishLynxAP5"]
-    office_router["Office ASUS router"]
-    timing_router["E-Timing ASUS router\nDHCP server"]
+  subgraph asus_network["ASUS LAN 192.168.20.0/24"]
+    office_router["SSO-Office\n192.168.20.2"]
+    timing_router["SSO-Etiming\n192.168.20.1\nDHCP server"]
   end
 
   office_pc["Office computer\nDHCP address"]
   switch["Timing switch"]
-  capture["Capture\n192.168.0.25\nWindows DNS and NTP services"]
-  analysis["Analysis / Livestream computer\n192.168.0.15"]
+  capture["Capture\n192.168.20.25\nWindows DNS and NTP services"]
+  analysis["Analysis / Livestream computer\n192.168.20.15"]
   poe["PoE adapter"]
-  camera["FinishLynx camera\n192.168.0.26"]
+  camera["FinishLynx camera\n192.168.20.26"]
 
   subgraph etiming_network["E-Timing network: SSID etiming"]
-    dlink["E-Timing D-Link router\n192.168.0.10"]
-    decoder["MYLAPS decoder\nWi-Fi: 192.168.0.19\nEthernet: 192.168.0.20"]
-    mini["Mini computer\n192.168.0.35"]
+    dlink["E-Timing D-Link router\n192.168.20.10"]
+    decoder["MYLAPS decoder\nWi-Fi: 192.168.20.19\nEthernet: 192.168.20.20"]
+    mini["Mini computer\n192.168.20.35"]
   end
 
   office_router ---|Ethernet| office_pc
@@ -39,18 +39,17 @@ flowchart TD
   switch ---|Ethernet| poe
   poe ---|Ethernet / PoE| camera
   switch ---|Ethernet| dlink
+  timing_router -.->|"2.4 GHz Client Bridge\nSSID SSO-ETiming-Link"| office_router
   decoder -.->|"DNS and NTP over the LAN"| capture
 ```
 
-The diagram groups equipment by the clouds in the source image. Grouping does not establish separate IP subnets or VLANs. The source image does not draw the physical connection between the ASUS routers or the decoder/mini-computer connections within the E-Timing cloud. Those links are deliberately not invented here. The decoder can use Wi-Fi or Ethernet; the dotted DNS/NTP arrow does not imply a direct cable to Capture.
+The diagram groups equipment by the clouds in the source image. Grouping does not establish separate IP subnets or VLANs. The dotted line between the ASUS routers is the 2.4 GHz client bridge from the [wireless LAN setup]({{ '/etiming-router-setup.html' | relative_url }}). Computers do not join `SSO-ETiming-Link`. The source image does not draw the decoder or mini-computer connections within the E-Timing cloud. Those links are deliberately not invented here. The decoder can use Wi-Fi or Ethernet; the dotted DNS/NTP arrow does not imply a direct cable to Capture.
 
 ### Items to confirm
 
-- The [wireless LAN setup]({{ '/etiming-router-setup.html' | relative_url }}) links these ASUS routers with a 2.4 GHz client bridge on `192.168.20.0/24`. This diagram is still the older source image: it does not show that bridge, and its equipment addresses are `192.168.0.x`.
-- Whether the D-Link unit operates as a router or an access point, and whether its DHCP server is disabled.
+- Whether the D-Link unit operates as a router or an access point, and whether its DHCP server is disabled. `SSO-Etiming` is the only DHCP server on this LAN.
 - How the mini computer attaches to the LAN.
 - Which connection gives Capture internet access. It is separate from the isolated timing LAN; the source image does not show its physical path.
-- Whether all listed equipment addresses and SSIDs are still current.
 
 ## Peripherals and video
 
@@ -75,7 +74,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  mini["Mini computer\n192.168.0.35"]
+  mini["Mini computer\n192.168.20.35"]
   tv["TV"]
   mini ---|HDMI| tv
 ```
@@ -88,16 +87,16 @@ Credential references below are proposed password-manager item names, not existi
 
 | Device / service | Address or identifier | Notes | Proposed credential reference |
 | --- | --- | --- | --- |
-| Capture | `192.168.0.25` | Timing computer; Windows Time server and Technitium DNS | `SSO / Capture / Windows login` |
-| Analysis / Livestream | `192.168.0.15` | Printer and video capture attached | `SSO / Analysis / Windows login` |
-| MYLAPS decoder | Wi-Fi `.19`; Ethernet `.20` on `192.168.0.x` | Two possible interface addresses; do not assume simultaneous use | Add a decoder item only if credentials are required |
-| FinishLynx camera | `192.168.0.26` | Source notes camera address as Capture IP + 1; recheck after address changes | Not specified |
-| D-Link router | `192.168.0.10` | Operating mode to confirm | `SSO / D-Link / Administrator` |
-| E-Timing Wi-Fi | SSID `etiming` | Password stored separately | `SSO / E-Timing Wi-Fi` |
-| Mini computer | `192.168.0.35` | HDMI output to TV | `SSO / Mini computer / Windows login` |
-| E-Timing ASUS router | Address not specified | Source identifies it as DHCP server | `SSO / E-Timing ASUS / Administrator` |
-| Office ASUS router | Address not specified | Inter-router connection to confirm | `SSO / Office ASUS / Administrator` |
-| ASUS Wi-Fi | `FinishLynx`, `FinishLynxAP5` | SSID-to-radio/router mapping not specified | `SSO / FinishLynx Wi-Fi` |
+| Capture | `192.168.20.25` | Timing computer; Windows Time server and Technitium DNS | `SSO / Capture / Windows login` |
+| Analysis / Livestream | `192.168.20.15` | Printer and video capture attached | `SSO / Analysis / Windows login` |
+| MYLAPS decoder | Wi-Fi `.19`; Ethernet `.20` on `192.168.20.x` | Two possible interface addresses; do not assume simultaneous use | Add a decoder item only if credentials are required |
+| FinishLynx camera | `192.168.20.26` | First camera is Capture's address plus 1. Further cameras continue at `.27`, `.28`, and so on. | Not specified |
+| D-Link router | `192.168.20.10` | Operating mode to confirm. Leave its DHCP server disabled. | `SSO / D-Link / Administrator` |
+| Timing-desk Wi-Fi | SSID `etiming` | 5 GHz on `SSO-Etiming`. Password stored separately. | `SSO / E-Timing Wi-Fi` |
+| Mini computer | `192.168.20.35` | HDMI output to TV | `SSO / Mini computer / Windows login` |
+| E-Timing ASUS router | `192.168.20.1` (`SSO-Etiming`) | DHCP server. 5 GHz SSID `etiming`. 2.4 GHz SSID `SSO-ETiming-Link` is the backhaul only. | `SSO / E-Timing ASUS / Administrator` |
+| Office ASUS router | `192.168.20.2` (`SSO-Office`) | 2.4 GHz client bridge to `SSO-Etiming`. 5 GHz SSID `SSO-Office`. DHCP disabled. | `SSO / Office ASUS / Administrator` |
+| Office Wi-Fi | SSID `SSO-Office` | 5 GHz on `SSO-Office`. Password stored separately. | `SSO / Office Wi-Fi` |
 | Office computer | DHCP | Ethernet to office ASUS router | Not specified |
 | Technitium | Capture, TCP 5380 administration | Local console: `http://localhost:5380/` | `SSO / Capture / Technitium administrator` |
 
@@ -105,11 +104,11 @@ Credential references below are proposed password-manager item names, not existi
 
 The original diagram predates this configuration:
 
-- The decoder uses `192.168.0.25` as its DNS server.
-- Technitium on Capture answers `us.pool.ntp.org` with `192.168.0.25`.
+- The decoder uses `192.168.20.25` as its DNS server.
+- Technitium on Capture answers `us.pool.ntp.org` with `192.168.20.25`.
 - Windows Time serves Capture's clock over UDP port 123.
 - Capture obtains upstream time from `time.windows.com` using its internet connection.
-- Windows Firewall permits decoder DNS and NTP requests from both `192.168.0.19` and `192.168.0.20`.
+- Windows Firewall permits decoder DNS and NTP requests from both `192.168.20.19` and `192.168.20.20`.
 - Capture retains its normal DNS settings; it does not need to use Technitium for its own lookups.
 
 See [MYLAPS clock synchronization through Capture]({{ '/mylaps-capture-ntp.html' | relative_url }}) for setup and verification instructions. This synchronizes the decoder with Capture, not automatically with the FinishLynx camera or other timing equipment.

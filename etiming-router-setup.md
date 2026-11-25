@@ -67,10 +67,19 @@ Solid lines are Ethernet or local Wi-Fi on that router. The dotted line is the w
 | Network | `192.168.20.0/24` |
 | Timing router | `192.168.20.1` |
 | Office router | `192.168.20.2` |
-| Fixed-address equipment | Unused addresses from `192.168.20.3` through `192.168.20.127` |
+| Fixed-address range | `192.168.20.3` through `192.168.20.127` |
 | DHCP pool | `192.168.20.128` through `192.168.20.199` |
 
-Assign stable addresses to computers hosting shares or services, either manually outside the DHCP pool or using DHCP reservations on `SSO-Etiming`. Record those assignments separately. 
+These hosts kept the same last octet when the LAN moved from `192.168.0.0/24` to `192.168.20.0/24`. Assign any further computers that host shares or services from the fixed range, either manually or with a DHCP reservation on `SSO-Etiming`. Do not put a fixed host in the DHCP pool.
+
+| Device | Address | Notes |
+| --- | --- | --- |
+| D-Link | `192.168.20.10` | Operating mode still to confirm. Leave its DHCP server disabled. |
+| Analysis / Livestream | `192.168.20.15` | Hosts the `MEETS` share used in the checks below. |
+| MYLAPS decoder | Wi-Fi `192.168.20.19`; Ethernet `192.168.20.20` | One interface address at a time. |
+| Capture | `192.168.20.25` | DNS and NTP server for the decoder. |
+| FinishLynx cameras | `192.168.20.26`, then `.27`, and so on | Each camera is Capture's address plus 1, plus 2, and so on. |
+| Mini computer | `192.168.20.35` | HDMI output to the results TV. | 
 
 Obtain the following from the timing team's secure credential record:
 
@@ -305,7 +314,7 @@ The local `192.168.20.x` route is sufficient to reach timing equipment. If venue
 | Office Wi-Fi does not appear | Confirm the 5 GHz radio is enabled in AP mode with SSID broadcast enabled. Check that the device supports 5 GHz. |
 | Wi-Fi joins but cannot reach LAN hosts | Check AP Isolation, bridge membership, DHCP address, and host firewall. |
 | Routers respond but share or application fails | Test by IP. Check host address, application listening interface, firewall, credentials, and share permissions. |
-| Devices still use `192.168.0.x` | Update static addresses and references in applications and mapped drives. |
+| A device still has a `192.168.0.x` address | The timing LAN is `192.168.20.0/24`. Give that device the same last octet on `192.168.20.x`, and update application and mapped-drive references. |
 | Link works nearby but fails at the rink | Improve placement, reduce obstructions, test channels 1/6/11, and check packet loss under actual conditions. |
 | One client works but multiple clients fail | Investigate Client Bridge limitations. One successful ping is not proof of a working deployment. |
 
